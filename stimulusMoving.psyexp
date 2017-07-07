@@ -1,0 +1,144 @@
+<PsychoPy2experiment version="1.79.01" encoding="utf-8">
+  <Settings>
+    <Param name="Show mouse" val="False" valType="bool" updates="None"/>
+    <Param name="Save csv file" val="False" valType="bool" updates="None"/>
+    <Param name="Monitor" val="testMonitor" valType="str" updates="None"/>
+    <Param name="Enable Escape" val="True" valType="bool" updates="None"/>
+    <Param name="color" val="$[-1,-1, -1]" valType="str" updates="None"/>
+    <Param name="Window size (pixels)" val="[1920, 1080]" valType="code" updates="None"/>
+    <Param name="Full-screen window" val="True" valType="bool" updates="None"/>
+    <Param name="colorSpace" val="rgb" valType="str" updates="None"/>
+    <Param name="Save log file" val="True" valType="bool" updates="None"/>
+    <Param name="Experiment info" val="{u'session': u'001', u'participant': u''}" valType="code" updates="None"/>
+    <Param name="Save excel file" val="False" valType="bool" updates="None"/>
+    <Param name="Save wide csv file" val="True" valType="bool" updates="None"/>
+    <Param name="Save psydat file" val="True" valType="bool" updates="None"/>
+    <Param name="expName" val="patternMoving4" valType="str" updates="None"/>
+    <Param name="logging level" val="exp" valType="code" updates="None"/>
+    <Param name="Units" val="use prefs" valType="str" updates="None"/>
+    <Param name="Show info dlg" val="True" valType="bool" updates="None"/>
+    <Param name="Saved data folder" val="" valType="code" updates="None"/>
+    <Param name="Screen" val="1" valType="num" updates="None"/>
+  </Settings>
+  <Routines>
+    <Routine name="trial">
+      <StaticComponent name="ISI">
+        <Param name="code" val="" valType="code" updates="None"/>
+        <Param name="name" val="ISI" valType="code" updates="None"/>
+        <Param name="stopVal" val="0.5" valType="code" updates="constant"/>
+        <Param name="durationEstim" val="" valType="code" updates="None"/>
+        <Param name="startEstim" val="" valType="code" updates="None"/>
+        <Param name="startType" val="time (s)" valType="str" updates="None"/>
+        <Param name="stopType" val="duration (s)" valType="str" updates="None"/>
+        <Param name="startVal" val="0.0" valType="code" updates="None"/>
+      </StaticComponent>
+      <CodeComponent name="code">
+        <Param name="Begin Experiment" val="#Parameters to use along the experiment&#10;#Constants&#10;RAD=0.9&#10;CTE_ANGLE=180       #Used to set the starting point of the stimulus in the screen&#10;ANGLES= [0, 45, 90] #Angles for the stimulus&#10;SIZE= len(ANGLES)   #Num. of angles used (valid for trial loop counter) &#10;COUNTER_LOOP= 5     #Num. of repeats for each stimulus movement loop&#10;STEP= 0.01          #Velocity of the stimulus&#10;#Variables&#10;index= 0            #Index for the ANGLES list&#10;position_ptrn=[0,0] #Position of the stimulus" valType="extendedCode" updates="constant"/>
+        <Param name="name" val="code" valType="code" updates="None"/>
+        <Param name="Each Frame" val="" valType="extendedCode" updates="constant"/>
+        <Param name="Begin Routine" val="angle= ANGLES[index]            #Used to find initial position &amp; inclination angle of stimulus&#10;stimulus_angle= CTE_ANGLE-angle #Angle assigned to the stimulus" valType="extendedCode" updates="constant"/>
+        <Param name="End Routine" val="index+=1" valType="extendedCode" updates="constant"/>
+        <Param name="End Experiment" val="" valType="extendedCode" updates="constant"/>
+      </CodeComponent>
+    </Routine>
+    <Routine name="left_to_right">
+      <CodeComponent name="code_2">
+        <Param name="Begin Experiment" val="&#10;" valType="extendedCode" updates="constant"/>
+        <Param name="name" val="code_2" valType="code" updates="None"/>
+        <Param name="Each Frame" val="#Update the stimulus position in the screen&#10;position_ptrn[0]+= speed_x&#10;position_ptrn[1]+= speed_y" valType="extendedCode" updates="constant"/>
+        <Param name="Begin Routine" val="#Calculate the initial positions of the stimulus&#10;x= RAD*np.cos(np.deg2rad(CTE_ANGLE+angle))&#10;y= RAD*np.sin(np.deg2rad(CTE_ANGLE+angle))&#10;position_ptrn= [x,y]&#10;#Calculate the increment for x &amp; y in function of stimulus angle&#10;if (angle == 0): &#10;    speed_x= STEP&#10;    speed_y= 0&#10;elif (angle == 90):&#10;    speed_x= 0&#10;    speed_y= STEP&#10;else:&#10;    #Valid only for a stimulus angle of 45 degrees&#10;    speed_x= STEP*np.tan(np.deg2rad(CTE_ANGLE+angle))&#10;    speed_y= STEP*np.tan(np.deg2rad(CTE_ANGLE+angle))" valType="extendedCode" updates="constant"/>
+        <Param name="End Routine" val="" valType="extendedCode" updates="constant"/>
+        <Param name="End Experiment" val="" valType="extendedCode" updates="constant"/>
+      </CodeComponent>
+      <PolygonComponent name="polygon">
+        <Param name="lineColorSpace" val="rgb" valType="str" updates="constant"/>
+        <Param name="pos" val="position_ptrn" valType="code" updates="set every frame"/>
+        <Param name="fillColorSpace" val="rgb" valType="str" updates="constant"/>
+        <Param name="startVal" val="0.0" valType="code" updates="None"/>
+        <Param name="size" val="[0.2, 4]" valType="code" updates="constant"/>
+        <Param name="fillColor" val="blue" valType="str" updates="constant"/>
+        <Param name="units" val="from exp settings" valType="str" updates="None"/>
+        <Param name="nVertices" val="4" valType="code" updates="constant"/>
+        <Param name="opacity" val="1" valType="code" updates="constant"/>
+        <Param name="stopVal" val="3.5" valType="code" updates="constant"/>
+        <Param name="durationEstim" val="" valType="code" updates="None"/>
+        <Param name="interpolate" val="linear" valType="str" updates="constant"/>
+        <Param name="startEstim" val="" valType="code" updates="None"/>
+        <Param name="startType" val="time (s)" valType="str" updates="None"/>
+        <Param name="ori" val="stimulus_angle" valType="code" updates="set every repeat"/>
+        <Param name="stopType" val="duration (s)" valType="str" updates="None"/>
+        <Param name="advancedParams"/>
+        <Param name="name" val="polygon" valType="code" updates="constant"/>
+        <Param name="lineColor" val="blue" valType="str" updates="constant"/>
+        <Param name="lineWidth" val="1" valType="code" updates="constant"/>
+      </PolygonComponent>
+    </Routine>
+    <Routine name="right_to_left">
+      <CodeComponent name="code_3">
+        <Param name="Begin Experiment" val="" valType="extendedCode" updates="constant"/>
+        <Param name="name" val="code_3" valType="code" updates="None"/>
+        <Param name="Each Frame" val="#Update the stimulus position in the screen&#10;position_ptrn[0]+= speed_x&#10;position_ptrn[1]+= speed_y" valType="extendedCode" updates="constant"/>
+        <Param name="Begin Routine" val="#Calculate the initial positions of the stimulus&#10;x= RAD*np.cos(np.deg2rad(2*CTE_ANGLE+angle))&#10;y= RAD*np.sin(np.deg2rad(2*CTE_ANGLE+angle))&#10;position_ptrn= [x,y]&#10;#Calculate the increment for x &amp; y in function of stimulus angle&#10;if (angle == 0): &#10;    speed_x= STEP*(-1)&#10;    speed_y= 0&#10;elif (angle == 90):&#10;    speed_x= 0&#10;    speed_y= STEP*(-1)&#10;else:&#10;    #Valid only for a stimulus angle of 45 degrees&#10;    speed_x= STEP*np.tan(np.deg2rad(CTE_ANGLE-angle))&#10;    speed_y= STEP*np.tan(np.deg2rad(CTE_ANGLE-angle))" valType="extendedCode" updates="constant"/>
+        <Param name="End Routine" val="" valType="extendedCode" updates="constant"/>
+        <Param name="End Experiment" val="" valType="extendedCode" updates="constant"/>
+      </CodeComponent>
+      <PolygonComponent name="polygon_2">
+        <Param name="lineColorSpace" val="rgb" valType="str" updates="constant"/>
+        <Param name="pos" val="position_ptrn" valType="code" updates="set every frame"/>
+        <Param name="fillColorSpace" val="rgb" valType="str" updates="constant"/>
+        <Param name="startVal" val="0.0" valType="code" updates="None"/>
+        <Param name="size" val="[0.2, 3]" valType="code" updates="constant"/>
+        <Param name="fillColor" val="blue" valType="str" updates="constant"/>
+        <Param name="units" val="from exp settings" valType="str" updates="None"/>
+        <Param name="nVertices" val="4" valType="code" updates="constant"/>
+        <Param name="opacity" val="1" valType="code" updates="constant"/>
+        <Param name="stopVal" val="3.5" valType="code" updates="constant"/>
+        <Param name="durationEstim" val="" valType="code" updates="None"/>
+        <Param name="interpolate" val="linear" valType="str" updates="constant"/>
+        <Param name="startEstim" val="" valType="code" updates="None"/>
+        <Param name="startType" val="time (s)" valType="str" updates="None"/>
+        <Param name="ori" val="stimulus_angle" valType="code" updates="set every repeat"/>
+        <Param name="stopType" val="duration (s)" valType="str" updates="None"/>
+        <Param name="advancedParams"/>
+        <Param name="name" val="polygon_2" valType="code" updates="constant"/>
+        <Param name="lineColor" val="blue" valType="str" updates="constant"/>
+        <Param name="lineWidth" val="1" valType="code" updates="constant"/>
+      </PolygonComponent>
+    </Routine>
+  </Routines>
+  <Flow>
+    <LoopInitiator loopType="TrialHandler" name="trials">
+      <Param name="conditionsFile" val="" valType="str" updates="None"/>
+      <Param name="name" val="trials" valType="code" updates="None"/>
+      <Param name="random seed" val="" valType="code" updates="None"/>
+      <Param name="loopType" val="random" valType="str" updates="None"/>
+      <Param name="nReps" val="SIZE" valType="code" updates="None"/>
+      <Param name="endPoints" val="[0, 1]" valType="num" updates="None"/>
+      <Param name="conditions" val="None" valType="str" updates="None"/>
+    </LoopInitiator>
+    <Routine name="trial"/>
+    <LoopInitiator loopType="TrialHandler" name="left_to_right_loop">
+      <Param name="conditionsFile" val="" valType="str" updates="None"/>
+      <Param name="name" val="left_to_right_loop" valType="code" updates="None"/>
+      <Param name="random seed" val="" valType="code" updates="None"/>
+      <Param name="loopType" val="random" valType="str" updates="None"/>
+      <Param name="nReps" val="COUNTER_LOOP" valType="code" updates="None"/>
+      <Param name="endPoints" val="[0, 1]" valType="num" updates="None"/>
+      <Param name="conditions" val="None" valType="str" updates="None"/>
+    </LoopInitiator>
+    <Routine name="left_to_right"/>
+    <LoopTerminator name="left_to_right_loop"/>
+    <LoopInitiator loopType="TrialHandler" name="right_to_left_loop">
+      <Param name="conditionsFile" val="" valType="str" updates="None"/>
+      <Param name="name" val="right_to_left_loop" valType="code" updates="None"/>
+      <Param name="random seed" val="" valType="code" updates="None"/>
+      <Param name="loopType" val="random" valType="str" updates="None"/>
+      <Param name="nReps" val="COUNTER_LOOP" valType="code" updates="None"/>
+      <Param name="endPoints" val="[0, 1]" valType="num" updates="None"/>
+      <Param name="conditions" val="None" valType="str" updates="None"/>
+    </LoopInitiator>
+    <Routine name="right_to_left"/>
+    <LoopTerminator name="right_to_left_loop"/>
+    <LoopTerminator name="trials"/>
+  </Flow>
+</PsychoPy2experiment>
