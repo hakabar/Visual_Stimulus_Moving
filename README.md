@@ -10,6 +10,9 @@ This software display visual stimulus (blue bars) across the screen. the visual 
     - bottom of the screen to top of the screen as many times as requested in COUNTER_LOOP
     - top of the screen t bottom of the screen as many times as requested in COUNTER_LOOP
 
+The file stimulusMoving.psyexp is the graphical version of stimulus_moving.py created with PsychoPy2 Builder
+
+
 This experiment was created using PsychoPy2 Experiment Builder (v1.79.01), Thu 16 Feb 2017 04:27:52 PM PST
 If you publish work using this script please cite the relevant PsychoPy publications
   Peirce, JW (2007) PsychoPy - Psychophysics software in Python. Journal of Neuroscience Methods, 162(1-2), 8-13.
