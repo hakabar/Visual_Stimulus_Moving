@@ -2,10 +2,8 @@
 Python code to display visual stimulus. 
 Software developed by Diego Alnso San Alberto using PsychoPy2 Builder
 
-This software send a trigger signal via a NI USB 6008 DAQ analog output (/Dev1/ao1) to a control PC and display visual stimulus (blue bars) across the screen. 
+This software send a trigger signal via a NI USB 6008 DAQ digital output to a control PC, wait for 10 sec (to allow other sensors to initialize) and display visual stimulus (blue bars) across the screen. 
 
-We can set the duration of the experiment at the beginning of the experiment (experiment_time) and the software will divide the time equitably among all the stimulus patterns (stimulus_time)
-Information regarding the visual stimulus (time spend in the screen, angular velocity, position of the pattern in the screen...) is stored in a .txt file
 
 The visual stimulus move as follows:
 - left to right as many times as requested in COUNTER_LOOP
